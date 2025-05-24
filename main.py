@@ -423,6 +423,155 @@ def ipo_index_widget(
             status_code=500, detail=f"Unexpected error processing IPO data: {str(e)}"
         )
 
+# Consumer Confidence Widget
+@register_widget({
+    "name": "Consumer Confidence",
+    "description": "A time series chart displaying Consumer Confidence data from a remote CSV.",
+    "type": "table",
+    "endpoint": "consumer_confidence_widget",
+    "gridData": {"w": 20, "h": 12},
+    "params": [
+        {
+            "paramName": "type",
+            "label": "Confidence Component Type",
+            "type": "text",
+            "required": True,
+            "show": True,
+            "value": "domestic",  # Default to an actual component value
+            "description": "Select the Consumer Confidence component type.",
+            "options": [
+                {
+                    "value": "domestic",
+                    "label": "Domestic"
+                },
+                {
+                    "value": "international",
+                    "label": "International"
+                }
+                # Add other actual distinct values if more exist in this specific CSV
+            ]
+        }
+    ],
+    "data": {
+        "table": {
+            "enableCharts": True,
+            "showAll": False,
+            "chartView": {
+                "enabled": True,
+                "chartType": "line"
+            },
+            "columnsDefs": [
+                {
+                    "field": "filing_date",
+                    "headerName": "Date",
+                    "chartDataType": "time",
+                },
+                {
+                    "field": "count",      # Assuming 'count' holds the confidence value
+                    "headerName": "Level",    # Or "Index" or "Value"
+                    "chartDataType": "series",
+                }
+            ]
+        }
+    },
+})
+@app.get("/consumer_confidence_widget")
+def consumer_confidence_widget(
+    confidence_type: str = Query(
+        ...,
+        alias="type",
+        description="The component type from the Consumer Confidence CSV to filter by."
+    )
+):
+    """Fetches Consumer Confidence data, filters by component type,
+    and returns counts/levels over time.
+    
+    The 'type' query parameter specifies which value in the 'component' column
+    to filter for. The 'count' column for these rows will be plotted against 'filing_date'.
+    Assumes CSV has columns: filing_date, count, component.
+    """
+    csv_url = (
+        "https://raw.githubusercontent.com/john-friedman/datamule-indicators/main/"
+        "indicators/format1/Consumer%20Sentiment/consumer-confidence/overview.csv"
+    )
+    
+    try:
+        response = requests.get(csv_url, timeout=10)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        raise HTTPException(
+            status_code=503, detail=f"Could not fetch Consumer Confidence CSV: {e}"
+        )
+
+    try:
+        csv_content = response.text
+        csvfile = io.StringIO(csv_content)
+        reader = csv.DictReader(csvfile)
+        
+        expected_headers = ["filing_date", "count", "component"]
+        if not reader.fieldnames or not all(h in reader.fieldnames for h in expected_headers):
+            missing_headers = [h for h in expected_headers if h not in (reader.fieldnames or [])]
+            current_headers = ", ".join(reader.fieldnames or ["None"]) 
+            raise HTTPException(
+                status_code=500, 
+                detail=f"Consumer Confidence CSV missing headers. Expected: {expected_headers}. Found: {current_headers}. Missing: {missing_headers}"
+            )
+
+        processed_data = []
+        for row in reader:
+            try:
+                if row.get("component") == confidence_type:
+                    value_str = row.get("count") # Assuming 'count' is the value column
+                    date_str = row.get("filing_date")
+
+                    if value_str is None or value_str.strip() == "" or \
+                       date_str is None or date_str.strip() == "":
+                        continue
+                    
+                    value = float(value_str)
+                    processed_data.append({"filing_date": date_str, "count": value})
+            except ValueError:
+                continue 
+            except KeyError:
+                continue 
+        
+        if not processed_data:
+            all_components = set()
+            csvfile.seek(0)
+            temp_reader = csv.DictReader(csvfile)
+            if temp_reader.fieldnames and "component" in temp_reader.fieldnames:
+                next(temp_reader) 
+                for r_dict in temp_reader:
+                    comp = r_dict.get("component")
+                    if comp is not None:
+                        all_components.add(comp)
+            
+            if confidence_type not in all_components and "component" in (reader.fieldnames or []):
+                sample_components = list(all_components)[:5]
+                available_msg_part = ", ".join(sample_components)
+                if len(all_components) > 5:
+                    available_msg_part += "..."
+                raise HTTPException(
+                    status_code=404, 
+                    detail=f"Component type '{confidence_type}' not found in Consumer Confidence CSV. Available: {available_msg_part}"
+                )
+            else:
+                 raise HTTPException(
+                    status_code=404, 
+                    detail=f"No data for component '{confidence_type}' with valid values and dates in Consumer Confidence CSV."
+                )
+            
+        return processed_data
+
+    except csv.Error as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error parsing Consumer Confidence CSV: {e}"
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Unexpected error processing Consumer Confidence data: {str(e)}"
+        )
+
 # Simple table widget from an API endpoint
 # This is a simple widget that demonstrates how to use a table widget
 # from an API endpoint
