@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "simple-backend"
+version = "0.1.0"
+description = "Simple backend app for OpenBB Workspace"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "*"
+requests = "*"
+plotly = "*"
+uvicorn = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api" 
