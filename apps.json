@@ -1,0 +1,1860 @@
+[
+    {
+        "name": "Datamule Indicator",
+        "img": "",
+        "img_dark": "",
+        "img_light": "",
+        "description": "Datamule indicator",
+        "allowCustomization": true,
+        "tabs": {
+          "governance": {
+            "id": "governance",
+            "name": "Governance",
+            "layout": [
+              {
+                "i": "dei_widget",
+                "x": 0,
+                "y": 2,
+                "w": 20,
+                "h": 18,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              },
+              {
+                "i": "esg_widget",
+                "x": 20,
+                "y": 2,
+                "w": 20,
+                "h": 18,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              }
+            ]
+          },
+          "trade": {
+            "id": "trade",
+            "name": "Trade",
+            "layout": [
+              {
+                "i": "tariffs_widget",
+                "x": 0,
+                "y": 2,
+                "w": 40,
+                "h": 14,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              },
+              {
+                "i": "supply_chain_widget",
+                "x": 0,
+                "y": 16,
+                "w": 40,
+                "h": 13,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {
+                      "theme": {
+                        "baseTheme": "ag-default-dark",
+                        "overrides": {
+                          "pie": {
+                            "series": {
+                              "calloutLabel": {},
+                              "sectorLabel": {
+                                "enabled": true
+                              }
+                            }
+                          },
+                          "donut": {
+                            "series": {
+                              "calloutLabel": {},
+                              "sectorLabel": {
+                                "enabled": true
+                              }
+                            }
+                          },
+                          "scatter": {
+                            "axes": {
+                              "number": {
+                                "title": {
+                                  "fontSize": 11,
+                                  "spacing": 10,
+                                  "enabled": true,
+                                  "text": ""
+                                }
+                              }
+                            }
+                          },
+                          "common": {
+                            "axes": {
+                              "number": {
+                                "label": {}
+                              },
+                              "angle-number": {
+                                "label": {}
+                              },
+                              "radius-number": {
+                                "label": {}
+                              }
+                            },
+                            "padding": {
+                              "top": 20,
+                              "bottom": 5,
+                              "left": 20,
+                              "right": 40
+                            },
+                            "background": {
+                              "visible": false
+                            },
+                            "zoom": {
+                              "enabled": true,
+                              "anchorPointX": "pointer",
+                              "anchorPointY": "pointer",
+                              "minVisibleItems": 4,
+                              "autoScaling": {
+                                "enabled": true
+                              }
+                            },
+                            "legend": {
+                              "position": "top",
+                              "maxHeight": 50,
+                              "spacing": 20,
+                              "item": {
+                                "paddingX": 32,
+                                "paddingY": 8,
+                                "marker": {
+                                  "shape": "square",
+                                  "padding": 5,
+                                  "size": 11
+                                },
+                                "label": {
+                                  "color": "#fff",
+                                  "fontSize": 11
+                                }
+                              }
+                            },
+                            "title": {
+                              "fontSize": 12
+                            }
+                          }
+                        }
+                      },
+                      "common": {
+                        "axes": {
+                          "category": {
+                            "type": "category",
+                            "label": {
+                              "avoidCollisions": true,
+                              "fontSize": 11,
+                              "minSpacing": 5,
+                              "autoRotate": true
+                            },
+                            "position": "bottom"
+                          },
+                          "radius-category": {
+                            "type": "category",
+                            "label": {
+                              "avoidCollisions": true,
+                              "fontSize": 11,
+                              "minSpacing": 5
+                            }
+                          },
+                          "angle-category": {
+                            "type": "category",
+                            "label": {
+                              "avoidCollisions": true,
+                              "fontSize": 11,
+                              "minSpacing": 5
+                            }
+                          },
+                          "grouped-category": {
+                            "type": "category",
+                            "label": {
+                              "avoidCollisions": true,
+                              "fontSize": 11,
+                              "minSpacing": 5
+                            }
+                          },
+                          "number": {
+                            "type": "number",
+                            "position": "left",
+                            "crosshair": {
+                              "label": {}
+                            },
+                            "label": {
+                              "fontSize": 11,
+                              "autoRotate": false,
+                              "avoidCollisions": true
+                            }
+                          },
+                          "time": {
+                            "type": "time",
+                            "position": "bottom",
+                            "label": {
+                              "avoidCollisions": true,
+                              "fontSize": 11,
+                              "rotation": 0
+                            }
+                          }
+                        },
+                        "legend": {
+                          "position": "top",
+                          "maxHeight": 50,
+                          "spacing": 20,
+                          "item": {
+                            "paddingX": 32,
+                            "paddingY": 8,
+                            "marker": {
+                              "shape": "square",
+                              "padding": 5,
+                              "size": 11
+                            },
+                            "label": {
+                              "color": "#fff",
+                              "fontSize": 11
+                            }
+                          }
+                        }
+                      },
+                      "line": {
+                        "series": {
+                          "marker": {
+                            "enabled": false
+                          },
+                          "connectMissingData": true,
+                          "label": {
+                            "enabled": false
+                          },
+                          "tooltip": {
+                            "enabled": true
+                          }
+                        }
+                      },
+                      "pie": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "calloutLabel": {
+                            "enabled": true
+                          },
+                          "sectorLabel": {
+                            "enabled": true
+                          }
+                        }
+                      },
+                      "donut": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "calloutLabel": {
+                            "enabled": true
+                          },
+                          "sectorLabel": {
+                            "enabled": true
+                          }
+                        }
+                      },
+                      "area": {
+                        "series": {
+                          "marker": {
+                            "enabled": false
+                          },
+                          "label": {
+                            "enabled": false
+                          },
+                          "tooltip": {
+                            "enabled": true
+                          }
+                        }
+                      },
+                      "bubble": {
+                        "series": {
+                          "marker": {
+                            "enabled": false
+                          },
+                          "label": {
+                            "enabled": false
+                          },
+                          "tooltip": {
+                            "enabled": true
+                          }
+                        }
+                      },
+                      "histogram": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "bar": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false,
+                            "placement": "outside-end"
+                          }
+                        }
+                      },
+                      "scatter": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false,
+                            "placement": "top"
+                          }
+                        }
+                      },
+                      "treemap": {
+                        "series": {
+                          "group": {
+                            "label": {
+                              "enabled": true
+                            }
+                          },
+                          "tile": {
+                            "label": {
+                              "enabled": true
+                            }
+                          },
+                          "tooltip": {
+                            "enabled": true
+                          }
+                        },
+                        "padding": {
+                          "bottom": 10
+                        }
+                      },
+                      "sunburst": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true,
+                            "position": {
+                              "type": "pointer"
+                            },
+                            "interaction": {
+                              "enabled": true
+                            }
+                          },
+                          "label": {
+                            "enabled": true
+                          }
+                        },
+                        "padding": {
+                          "bottom": 10
+                        }
+                      },
+                      "heatmap": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": true
+                          }
+                        },
+                        "padding": {
+                          "bottom": 10
+                        }
+                      },
+                      "waterfall": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false,
+                            "placement": "inside"
+                          }
+                        }
+                      },
+                      "radar-line": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "radar-area": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "radial-bar": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "radial-column": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "nightingale": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      }
+                    },
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              }
+            ]
+          },
+          "employment": {
+            "id": "employment",
+            "name": "Employment",
+            "layout": [
+              {
+                "i": "layoffs_widget",
+                "x": 0,
+                "y": 2,
+                "w": 40,
+                "h": 24,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              }
+            ]
+          },
+          "market-dynamics": {
+            "id": "market-dynamics",
+            "name": "Market Dynamics",
+            "layout": [
+              {
+                "i": "outsourcing_widget",
+                "x": 0,
+                "y": 2,
+                "w": 40,
+                "h": 14,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              },
+              {
+                "i": "supplier_concentration_widget",
+                "x": 0,
+                "y": 16,
+                "w": 40,
+                "h": 13,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              }
+            ]
+          },
+          "consumer-sentiment": {
+            "id": "consumer-sentiment",
+            "name": "Consumer Sentiment",
+            "layout": [
+              {
+                "i": "consumer_confidence_widget",
+                "x": 0,
+                "y": 2,
+                "w": 40,
+                "h": 20,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              }
+            ]
+          },
+          "war": {
+            "id": "war",
+            "name": "War",
+            "layout": [
+              {
+                "i": "war_widget",
+                "x": 0,
+                "y": 17,
+                "w": 40,
+                "h": 12,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {
+                      "theme": {
+                        "baseTheme": "ag-default-dark",
+                        "overrides": {
+                          "pie": {
+                            "series": {
+                              "calloutLabel": {},
+                              "sectorLabel": {
+                                "enabled": true
+                              }
+                            }
+                          },
+                          "donut": {
+                            "series": {
+                              "calloutLabel": {},
+                              "sectorLabel": {
+                                "enabled": true
+                              }
+                            }
+                          },
+                          "scatter": {
+                            "axes": {
+                              "number": {
+                                "title": {
+                                  "fontSize": 11,
+                                  "spacing": 10,
+                                  "enabled": true,
+                                  "text": ""
+                                }
+                              }
+                            }
+                          },
+                          "common": {
+                            "axes": {
+                              "number": {
+                                "label": {}
+                              },
+                              "angle-number": {
+                                "label": {}
+                              },
+                              "radius-number": {
+                                "label": {}
+                              }
+                            },
+                            "padding": {
+                              "top": 20,
+                              "bottom": 5,
+                              "left": 20,
+                              "right": 40
+                            },
+                            "background": {
+                              "visible": false
+                            },
+                            "zoom": {
+                              "enabled": true,
+                              "anchorPointX": "pointer",
+                              "anchorPointY": "pointer",
+                              "minVisibleItems": 4,
+                              "autoScaling": {
+                                "enabled": true
+                              }
+                            },
+                            "legend": {
+                              "position": "top",
+                              "maxHeight": 50,
+                              "spacing": 20,
+                              "item": {
+                                "paddingX": 32,
+                                "paddingY": 8,
+                                "marker": {
+                                  "shape": "square",
+                                  "padding": 5,
+                                  "size": 11
+                                },
+                                "label": {
+                                  "color": "#fff",
+                                  "fontSize": 11
+                                }
+                              }
+                            },
+                            "title": {
+                              "fontSize": 12
+                            }
+                          }
+                        }
+                      },
+                      "common": {
+                        "axes": {
+                          "category": {
+                            "type": "category",
+                            "label": {
+                              "avoidCollisions": true,
+                              "fontSize": 11,
+                              "minSpacing": 5,
+                              "autoRotate": true
+                            },
+                            "position": "bottom"
+                          },
+                          "radius-category": {
+                            "type": "category",
+                            "label": {
+                              "avoidCollisions": true,
+                              "fontSize": 11,
+                              "minSpacing": 5
+                            }
+                          },
+                          "angle-category": {
+                            "type": "category",
+                            "label": {
+                              "avoidCollisions": true,
+                              "fontSize": 11,
+                              "minSpacing": 5
+                            }
+                          },
+                          "grouped-category": {
+                            "type": "category",
+                            "label": {
+                              "avoidCollisions": true,
+                              "fontSize": 11,
+                              "minSpacing": 5
+                            }
+                          },
+                          "number": {
+                            "type": "number",
+                            "position": "left",
+                            "crosshair": {
+                              "label": {}
+                            },
+                            "label": {
+                              "fontSize": 11,
+                              "autoRotate": false,
+                              "avoidCollisions": true
+                            }
+                          },
+                          "time": {
+                            "type": "time",
+                            "position": "bottom",
+                            "label": {
+                              "avoidCollisions": true,
+                              "fontSize": 11,
+                              "rotation": 0
+                            }
+                          }
+                        },
+                        "legend": {
+                          "position": "top",
+                          "maxHeight": 50,
+                          "spacing": 20,
+                          "item": {
+                            "paddingX": 32,
+                            "paddingY": 8,
+                            "marker": {
+                              "shape": "square",
+                              "padding": 5,
+                              "size": 11
+                            },
+                            "label": {
+                              "color": "#fff",
+                              "fontSize": 11
+                            }
+                          }
+                        }
+                      },
+                      "line": {
+                        "series": {
+                          "marker": {
+                            "enabled": false
+                          },
+                          "connectMissingData": true,
+                          "label": {
+                            "enabled": false
+                          },
+                          "tooltip": {
+                            "enabled": true
+                          }
+                        }
+                      },
+                      "pie": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "calloutLabel": {
+                            "enabled": true
+                          },
+                          "sectorLabel": {
+                            "enabled": true
+                          }
+                        }
+                      },
+                      "donut": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "calloutLabel": {
+                            "enabled": true
+                          },
+                          "sectorLabel": {
+                            "enabled": true
+                          }
+                        }
+                      },
+                      "area": {
+                        "series": {
+                          "marker": {
+                            "enabled": false
+                          },
+                          "label": {
+                            "enabled": false
+                          },
+                          "tooltip": {
+                            "enabled": true
+                          }
+                        }
+                      },
+                      "bubble": {
+                        "series": {
+                          "marker": {
+                            "enabled": false
+                          },
+                          "label": {
+                            "enabled": false
+                          },
+                          "tooltip": {
+                            "enabled": true
+                          }
+                        }
+                      },
+                      "histogram": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "bar": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false,
+                            "placement": "outside-end"
+                          }
+                        }
+                      },
+                      "scatter": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false,
+                            "placement": "top"
+                          }
+                        }
+                      },
+                      "treemap": {
+                        "series": {
+                          "group": {
+                            "label": {
+                              "enabled": true
+                            }
+                          },
+                          "tile": {
+                            "label": {
+                              "enabled": true
+                            }
+                          },
+                          "tooltip": {
+                            "enabled": true
+                          }
+                        },
+                        "padding": {
+                          "bottom": 10
+                        }
+                      },
+                      "sunburst": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true,
+                            "position": {
+                              "type": "pointer"
+                            },
+                            "interaction": {
+                              "enabled": true
+                            }
+                          },
+                          "label": {
+                            "enabled": true
+                          }
+                        },
+                        "padding": {
+                          "bottom": 10
+                        }
+                      },
+                      "heatmap": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": true
+                          }
+                        },
+                        "padding": {
+                          "bottom": 10
+                        }
+                      },
+                      "waterfall": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false,
+                            "placement": "inside"
+                          }
+                        }
+                      },
+                      "radar-line": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "radar-area": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "radial-bar": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "radial-column": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "nightingale": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      }
+                    },
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              },
+              {
+                "i": "military_equipment_widget",
+                "x": 0,
+                "y": 2,
+                "w": 40,
+                "h": 15,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              }
+            ]
+          },
+          "terrorism": {
+            "id": "terrorism",
+            "name": "Terrorism",
+            "layout": [
+              {
+                "i": "terrorism_widget",
+                "x": 0,
+                "y": 2,
+                "w": 40,
+                "h": 21,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              }
+            ]
+          },
+          "technology": {
+            "id": "technology",
+            "name": "Technology",
+            "layout": [
+              {
+                "i": "space_widget",
+                "x": 0,
+                "y": 2,
+                "w": 20,
+                "h": 12,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              },
+              {
+                "i": "nuclear_widget",
+                "x": 20,
+                "y": 2,
+                "w": 20,
+                "h": 12,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              },
+              {
+                "i": "llm_widget",
+                "x": 0,
+                "y": 14,
+                "w": 40,
+                "h": 13,
+                "state": {
+                  "params": {
+                    "type": "google_domestic"
+                  },
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {
+                      "theme": {
+                        "baseTheme": "ag-default-dark",
+                        "overrides": {
+                          "pie": {
+                            "series": {
+                              "calloutLabel": {},
+                              "sectorLabel": {
+                                "enabled": true
+                              }
+                            }
+                          },
+                          "donut": {
+                            "series": {
+                              "calloutLabel": {},
+                              "sectorLabel": {
+                                "enabled": true
+                              }
+                            }
+                          },
+                          "scatter": {
+                            "axes": {
+                              "number": {
+                                "title": {
+                                  "fontSize": 11,
+                                  "spacing": 10,
+                                  "enabled": true,
+                                  "text": ""
+                                }
+                              }
+                            }
+                          },
+                          "common": {
+                            "axes": {
+                              "number": {
+                                "label": {}
+                              },
+                              "angle-number": {
+                                "label": {}
+                              },
+                              "radius-number": {
+                                "label": {}
+                              }
+                            },
+                            "padding": {
+                              "top": 20,
+                              "bottom": 5,
+                              "left": 20,
+                              "right": 40
+                            },
+                            "background": {
+                              "visible": false
+                            },
+                            "zoom": {
+                              "enabled": true,
+                              "anchorPointX": "pointer",
+                              "anchorPointY": "pointer",
+                              "minVisibleItems": 4,
+                              "autoScaling": {
+                                "enabled": true
+                              }
+                            },
+                            "legend": {
+                              "position": "top",
+                              "maxHeight": 50,
+                              "spacing": 20,
+                              "item": {
+                                "paddingX": 32,
+                                "paddingY": 8,
+                                "marker": {
+                                  "shape": "square",
+                                  "padding": 5,
+                                  "size": 11
+                                },
+                                "label": {
+                                  "color": "#fff",
+                                  "fontSize": 11
+                                }
+                              }
+                            },
+                            "title": {
+                              "fontSize": 12
+                            }
+                          }
+                        }
+                      },
+                      "common": {
+                        "axes": {
+                          "category": {
+                            "type": "category",
+                            "label": {
+                              "avoidCollisions": true,
+                              "fontSize": 11,
+                              "minSpacing": 5,
+                              "autoRotate": true
+                            },
+                            "position": "bottom"
+                          },
+                          "radius-category": {
+                            "type": "category",
+                            "label": {
+                              "avoidCollisions": true,
+                              "fontSize": 11,
+                              "minSpacing": 5
+                            }
+                          },
+                          "angle-category": {
+                            "type": "category",
+                            "label": {
+                              "avoidCollisions": true,
+                              "fontSize": 11,
+                              "minSpacing": 5
+                            }
+                          },
+                          "grouped-category": {
+                            "type": "category",
+                            "label": {
+                              "avoidCollisions": true,
+                              "fontSize": 11,
+                              "minSpacing": 5
+                            }
+                          },
+                          "number": {
+                            "type": "number",
+                            "position": "left",
+                            "crosshair": {
+                              "label": {}
+                            },
+                            "label": {
+                              "fontSize": 11,
+                              "autoRotate": false,
+                              "avoidCollisions": true
+                            }
+                          },
+                          "time": {
+                            "type": "time",
+                            "position": "bottom",
+                            "label": {
+                              "avoidCollisions": true,
+                              "fontSize": 11,
+                              "rotation": 0
+                            }
+                          }
+                        },
+                        "legend": {
+                          "position": "top",
+                          "maxHeight": 50,
+                          "spacing": 20,
+                          "item": {
+                            "paddingX": 32,
+                            "paddingY": 8,
+                            "marker": {
+                              "shape": "square",
+                              "padding": 5,
+                              "size": 11
+                            },
+                            "label": {
+                              "color": "#fff",
+                              "fontSize": 11
+                            }
+                          }
+                        }
+                      },
+                      "line": {
+                        "series": {
+                          "marker": {
+                            "enabled": false
+                          },
+                          "connectMissingData": true,
+                          "label": {
+                            "enabled": false
+                          },
+                          "tooltip": {
+                            "enabled": true
+                          }
+                        }
+                      },
+                      "pie": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "calloutLabel": {
+                            "enabled": true
+                          },
+                          "sectorLabel": {
+                            "enabled": true
+                          }
+                        }
+                      },
+                      "donut": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "calloutLabel": {
+                            "enabled": true
+                          },
+                          "sectorLabel": {
+                            "enabled": true
+                          }
+                        }
+                      },
+                      "area": {
+                        "series": {
+                          "marker": {
+                            "enabled": false
+                          },
+                          "label": {
+                            "enabled": false
+                          },
+                          "tooltip": {
+                            "enabled": true
+                          }
+                        }
+                      },
+                      "bubble": {
+                        "series": {
+                          "marker": {
+                            "enabled": false
+                          },
+                          "label": {
+                            "enabled": false
+                          },
+                          "tooltip": {
+                            "enabled": true
+                          }
+                        }
+                      },
+                      "histogram": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "bar": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false,
+                            "placement": "outside-end"
+                          }
+                        }
+                      },
+                      "scatter": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false,
+                            "placement": "top"
+                          }
+                        }
+                      },
+                      "treemap": {
+                        "series": {
+                          "group": {
+                            "label": {
+                              "enabled": true
+                            }
+                          },
+                          "tile": {
+                            "label": {
+                              "enabled": true
+                            }
+                          },
+                          "tooltip": {
+                            "enabled": true
+                          }
+                        },
+                        "padding": {
+                          "bottom": 10
+                        }
+                      },
+                      "sunburst": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true,
+                            "position": {
+                              "type": "pointer"
+                            },
+                            "interaction": {
+                              "enabled": true
+                            }
+                          },
+                          "label": {
+                            "enabled": true
+                          }
+                        },
+                        "padding": {
+                          "bottom": 10
+                        }
+                      },
+                      "heatmap": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": true
+                          }
+                        },
+                        "padding": {
+                          "bottom": 10
+                        }
+                      },
+                      "waterfall": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false,
+                            "placement": "inside"
+                          }
+                        }
+                      },
+                      "radar-line": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "radar-area": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "radial-bar": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "radial-column": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      },
+                      "nightingale": {
+                        "series": {
+                          "tooltip": {
+                            "enabled": true
+                          },
+                          "label": {
+                            "enabled": false
+                          }
+                        }
+                      }
+                    },
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              }
+            ]
+          },
+          "international": {
+            "id": "international",
+            "name": "International",
+            "layout": [
+              {
+                "i": "political_stability_widget",
+                "x": 0,
+                "y": 2,
+                "w": 40,
+                "h": 21,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              }
+            ]
+          },
+          "corporate-finance": {
+            "id": "corporate-finance",
+            "name": "Corporate Finance",
+            "layout": [
+              {
+                "i": "ipo_index_widget",
+                "x": 0,
+                "y": 2,
+                "w": 40,
+                "h": 20,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              }
+            ]
+          },
+          "health": {
+            "id": "health",
+            "name": "Health",
+            "layout": [
+              {
+                "i": "health_research_widget",
+                "x": 0,
+                "y": 2,
+                "w": 20,
+                "h": 12,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              },
+              {
+                "i": "health_widget",
+                "x": 20,
+                "y": 2,
+                "w": 20,
+                "h": 12,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              },
+              {
+                "i": "pandemic_widget",
+                "x": 0,
+                "y": 14,
+                "w": 40,
+                "h": 15,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              }
+            ]
+          },
+          "resources": {
+            "id": "resources",
+            "name": "Resources",
+            "layout": [
+              {
+                "i": "explosive_materials_widget",
+                "x": 0,
+                "y": 2,
+                "w": 20,
+                "h": 12,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              },
+              {
+                "i": "metals_widget",
+                "x": 20,
+                "y": 2,
+                "w": 20,
+                "h": 12,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              },
+              {
+                "i": "semiconductor_materials_widget",
+                "x": 0,
+                "y": 14,
+                "w": 20,
+                "h": 12,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              },
+              {
+                "i": "propellant_components_widget",
+                "x": 20,
+                "y": 14,
+                "w": 20,
+                "h": 12,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              },
+              {
+                "i": "raw_materials_widget",
+                "x": 0,
+                "y": 26,
+                "w": 20,
+                "h": 12,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              },
+              {
+                "i": "electronic_components_widget",
+                "x": 20,
+                "y": 26,
+                "w": 20,
+                "h": 12,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              },
+              {
+                "i": "chemicals_widget",
+                "x": 0,
+                "y": 38,
+                "w": 40,
+                "h": 13,
+                "state": {
+                  "chartModel": {
+                    "modelType": "range",
+                    "chartType": "line",
+                    "chartOptions": {},
+                    "cellRange": {
+                      "columns": [
+                        "filing_date",
+                        "count"
+                      ]
+                    },
+                    "suppressChartRanges": true
+                  },
+                  "chartView": {
+                    "enabled": true,
+                    "chartType": "line"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "groups": []
+      }
+]
