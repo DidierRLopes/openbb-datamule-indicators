@@ -2,11 +2,13 @@
 import json
 import requests
 from pathlib import Path
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import asyncio
 from functools import wraps
+import csv
+import io
 
 # Initialize FastAPI application with metadata
 app = FastAPI(
@@ -82,12 +84,14 @@ def read_root():
 
 # Endpoint that returns the registered widgets configuration
 # The WIDGETS dictionary is maintained by the registry.py helper
-# which automatically registers widgets when using the @register_widget decorator
+# which automatically registers widgets when using the
+# @register_widget decorator
 @app.get("/widgets.json")
 def get_widgets():
     """Returns the configuration of all registered widgets
     
-    The widgets are automatically registered through the @register_widget decorator
+    The widgets are automatically registered through the
+    @register_widget decorator
     and stored in the WIDGETS dictionary from registry.py
     
     Returns:
@@ -108,11 +112,14 @@ def get_apps():
     """
     # Read and return the apps configuration file
     return JSONResponse(
-        content=json.load((Path(__file__).parent.resolve() / "apps.json").open())
+        content=json.load(
+            (Path(__file__).parent.resolve() / "apps.json").open()
+        )
     )
 
 # Table to Chart Widget
-# The most important part of this widget is that the default view is a chart that comes from the "chartView" key in the data object
+# The most important part of this widget is that the default view is a
+# chart that comes from the "chartView" key in the data object
 # chartDataType: Specifies how data is treated in a chart.
 #                Example: "category"
 #                Possible values: "category", "series", "time", "excluded"
@@ -169,7 +176,6 @@ def table_to_chart_widget():
         }
     ]
     return mock_data
-
 
 
 # Table to time series Widget
@@ -250,9 +256,178 @@ def table_to_time_series_widget():
     ]
     return mock_data
 
+# IPO Index Widget
+# Displays an IPO index over time from a remote CSV file.
+# The specific index/column to display is chosen by the 'type' query parameter.
+@register_widget({
+    "name": "IPO Index",
+    "description": "A time series chart displaying an IPO index from a remote CSV.",
+    "type": "table",
+    "endpoint": "ipo_index_widget",
+    "gridData": {"w": 20, "h": 12},
+    "params": [  # Documenting the parameter for users of the widget
+        {
+            "paramName": "type",
+            "label": "IPO Component Type",
+            "type": "text",
+            "required": True,
+            "show": True,
+            "value": "domestic_us",  # Default to a known valid component
+            "description": "Select the IPO component type to display the count for.",
+            "options": [
+                {
+                    "value": "domestic_us",
+                    "label": "Domestic US"
+                },
+                {
+                    "value": "international_us",
+                    "label": "International US"
+                },
+                {
+                    "value": "domestic_cn",
+                    "label": "Domestic CN"
+                },
+                {
+                    "value": "international_cn",
+                    "label": "International CN"
+                },
+                {
+                    "value": "domestic_eu",
+                    "label": "Domestic EU"
+                },
+                {
+                    "value": "international_eu",
+                    "label": "International EU"
+                }
+                # Add other actual distinct values from the 'component' column if more exist
+            ]
+        }
+    ],
+    "data": {
+        "table": {
+            "enableCharts": True,
+            "showAll": False,
+            "chartView": {
+                "enabled": True,
+                "chartType": "line"
+            },
+            "columnsDefs": [
+                {
+                    "field": "filing_date",
+                    "headerName": "Date",
+                    "chartDataType": "time",
+                },
+                {
+                    "field": "count",  # Now plotting the 'count' column
+                    "headerName": "Count", # Header reflects we are plotting 'count'
+                    "chartDataType": "series",
+                }
+            ]
+        }
+    },
+})
+@app.get("/ipo_index_widget")
+def ipo_index_widget(
+    ipo_type: str = Query(
+        ...,
+        alias="type",
+        description="The component type from the CSV to filter by (e.g., domestic_us)."
+    )
+):
+    """Fetches IPO data from a remote CSV, filters by component type,
+    and returns counts over time.
+    
+    The 'type' query parameter specifies which value in the 'component' column
+    to filter for. The 'count' column for these rows will be plotted against 'filing_date'.
+    """
+    csv_url = (
+        "https://raw.githubusercontent.com/john-friedman/datamule-indicators/"
+        "main/indicators/format1/Corporate%20Finance/ipo/overview.csv"
+    )
+    
+    try:
+        response = requests.get(csv_url, timeout=10)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        raise HTTPException(
+            status_code=503, detail=f"Could not fetch IPO data CSV: {e}"
+        )
+
+    try:
+        csv_content = response.text
+        csvfile = io.StringIO(csv_content)
+        reader = csv.DictReader(csvfile)
+        
+        # Headers are known: filing_date, count, component
+        if not reader.fieldnames or not all(h in reader.fieldnames for h in ["filing_date", "count", "component"]):
+            raise HTTPException(
+                status_code=500, 
+                detail="CSV file is missing expected headers: filing_date, count, component."
+            )
+
+        processed_data = []
+        for row in reader:
+            try:
+                if row.get("component") == ipo_type:
+                    count_str = row.get("count")
+                    filing_date_str = row.get("filing_date")
+
+                    if count_str is None or count_str.strip() == "" or \
+                       filing_date_str is None or filing_date_str.strip() == "":
+                        continue # Skip if essential data is missing
+                    
+                    count = float(count_str)
+                    processed_data.append({"filing_date": filing_date_str, "count": count})
+            except ValueError:
+                continue # Skip rows where count is not a valid number
+            except KeyError:
+                continue # Skip rows if essential keys are missing (should be caught by header check)
+        
+        if not processed_data:
+            # Check if the ipo_type even existed in the component column
+            all_components = set()
+            csvfile.seek(0) # Reset reader to the beginning of the stream
+            # Create a new reader instance as the old one might be exhausted or at EOF
+            # Alternatively, store rows in a list first if memory allows and file is not excessively large
+            temp_reader = csv.DictReader(csvfile)
+            next(temp_reader) # Skip header row again for this temporary reader
+            for r_dict in temp_reader:
+                comp = r_dict.get("component")
+                if comp is not None:
+                    all_components.add(comp)
+            
+            if ipo_type not in all_components:
+                # Show a sample of available components in the error message
+                sample_components = list(all_components)[:5] # Get up to 5 samples
+                available_msg_part = ", ".join(sample_components)
+                if len(all_components) > 5:
+                    available_msg_part += "..."
+                raise HTTPException(
+                    status_code=404, 
+                    detail=f"Component type '{ipo_type}' not found. Available types: {available_msg_part}"
+                )
+            else:
+                 raise HTTPException(
+                    status_code=404, 
+                    detail=f"No data found for component type '{ipo_type}' with valid counts and filing dates."
+                )
+            
+        return processed_data
+
+    except csv.Error as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error parsing CSV data: {e}"
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Unexpected error processing IPO data: {str(e)}"
+        )
+
 # Simple table widget from an API endpoint
-# This is a simple widget that demonstrates how to use a table widget from an API endpoint
-# Note that the endpoint is the endpoint of the API that will be used to fetch the data
+# This is a simple widget that demonstrates how to use a table widget
+# from an API endpoint
+# Note that the endpoint is the endpoint of the API that will be used to
+# fetch the data
 # and the data is returned in the JSON format
 @register_widget({
     "name": "Table Widget from API Endpoint",
