@@ -1,10 +1,10 @@
 [
     {
         "name": "Datamule Indicator",
-        "img": "",
+        "img": "https://avatars.githubusercontent.com/u/46555136?v=4",
         "img_dark": "",
         "img_light": "",
-        "description": "Datamule indicator",
+        "description": "This is a comprehensive app for tracking and analyzing financial and economic indicators across multiple domains using SEC filing data. The system processes mentions of various topics from regulatory filings and generates standardized sector-level comparisons and metrics. Data is updated daily on John Friedman's GitHub repository.",
         "allowCustomization": true,
         "tabs": {
           "governance": {
