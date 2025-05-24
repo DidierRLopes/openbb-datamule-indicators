@@ -155,6 +155,11 @@ def read_root():
     """Root endpoint that returns basic information about the API"""
     return {"Info": "Hello World"}
 
+@app.get("/health")
+def health_check():
+    """Health check endpoint for monitoring"""
+    return {"status": "healthy"}
+
 
 # Endpoint that returns the registered widgets configuration
 # The WIDGETS dictionary is maintained by the registry.py helper
