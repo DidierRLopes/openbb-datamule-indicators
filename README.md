@@ -1,8 +1,20 @@
 # OpenBB Datamule Indicators
 
-A FastAPI backend application that provides various economic and market indicators through API endpoints. This service is designed to work with OpenBB Workspace.
+This is a comprehensive app for tracking and analyzing financial and economic indicators across multiple domains using SEC filing data. The system processes mentions of various topics from regulatory filings and generates standardized sector-level comparisons and metrics. Data is updated daily on [John Friedman's GitHub repository](https://github.com/john-friedman/datamule-indicators).
 
-This was built based on [https://github.com/john-friedman/datamule-indicators](https://github.com/john-friedman/datamule-indicators).
+![CleanShot 2025-05-24 at 18 29 30@2x](https://github.com/user-attachments/assets/88d84678-c803-4e38-8d56-f42be5008583)
+
+## Getting Started
+
+Sign-in to the [OpenBB Workspace](https://pro.openbb.co/), and follow the following steps:
+
+1. Go to the "Apps" tab
+2. Click on "Connect backend"
+3. Fill in the form with:
+  Name: Datamule Indicator
+  URL: https://openbb-datamule-indicators.fly.dev
+5. Click on "Test". You should get a "Test successful" with the number of apps found.
+6. Click on "Add".
 
 ## Features
 
